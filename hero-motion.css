@@ -1,0 +1,182 @@
+/* Agentify composition trial, adapted to Cinco y Media's type and content. */
+.hero-header,
+.hero-motion { background: var(--soft); }
+.hero-header .header-cta {
+  justify-content: center;
+  min-width: 116px;
+  padding: 13px 23px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+}
+.hero-header .header-cta:hover { background: var(--ink); }
+.hero-motion { padding: 0; overflow: hidden; }
+.hero-motion-layout {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: min(920px, calc(100svh - 104px));
+  padding-block: 76px 90px;
+}
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  width: 65%;
+}
+.hero-badge {
+  grid-area: badge;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 13px;
+  border: 1px solid #d2d7e0;
+  border-radius: 999px;
+  background: #ffffff70;
+  color: #4a5568;
+  font-size: .625rem;
+  letter-spacing: .1em;
+  margin-bottom: 30px;
+}
+.hero-badge > span { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+.hero-motion h1 {
+  grid-area: title;
+  color: #000;
+  font-weight: 900;
+  font-size: clamp(3.5rem, calc(23vw - 5.125rem), 5.625rem);
+  line-height: 1.04;
+  letter-spacing: -.055em;
+  animation: hero-enter .6s ease-out both;
+}
+.hero-motion h1 .hero-accent { color: var(--blue); }
+.hero-motion .hero-description {
+  grid-area: intro;
+  max-width: 540px;
+  margin-top: 28px;
+  font-size: 1rem;
+  color: #4a5568;
+  line-height: 1.7;
+  letter-spacing: -.01em;
+}
+.hero-motion .hero-actions { grid-area: actions; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 30px; }
+.hero-motion .primary-link,
+.video-launch-label,
+.problem-cta {
+  width: auto;
+  min-height: 54px;
+  padding: 16px 23px;
+  border-radius: 999px;
+  font-size: .8125rem;
+}
+.hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 13px 20px;
+  border: 1px solid #d2d7e0;
+  border-radius: 999px;
+  background: #ffffffd9;
+  font-size: .8125rem;
+  font-weight: 500;
+}
+.hero-secondary:hover { background: #fff; }
+.hero-play { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #e8edff; color: var(--blue); }
+.hero-motion .hero-local { grid-area: local; max-width: 470px; margin-top: 32px; font-size: .75rem; line-height: 1.7; color: #4a5568; }
+.hero-visual {
+  grid-area: art;
+  position: absolute;
+  inset: 0 -4% 0 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 20%, #000 80%, transparent 100%);
+}
+.hero-visual video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(.8);
+  transform-origin: right center;
+  opacity: .8;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 15%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 15%, #000 90%, transparent 100%);
+}
+.hero-motion-controls {
+  grid-area: controls;
+  position: absolute;
+  right: var(--gutter);
+  bottom: 24px;
+  justify-content: center;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #4a5568;
+}
+.hero-motion-hint { font-size: .6875rem; }
+.hero-motion-toggle { background: #ffffff80; border: 1px solid #c5cdd8; border-radius: 999px; padding: 10px 16px; min-height: 44px; font-size: .6875rem; }
+.hero-motion-toggle:hover { background: #fff; }
+.hero-motion + .problem { margin-top: 0; }
+@keyframes hero-enter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Wrap within the copy column; the independent video layer keeps its original framing. */
+.hero-motion h1 { text-wrap: balance; }
+.hero-motion .hero-line { display: inline; }
+@media (min-width: 1500px) {
+  .hero-copy { width: 80%; }
+  .hero-visual video { translate: 7% 0; }
+}
+@media (max-width: 1100px) and (min-width: 1025px) {
+  .hero-motion .hero-description { max-width: 430px; }
+  .hero-motion .hero-actions { gap: 10px; }
+  .hero-motion .primary-link { padding-inline: 18px; }
+  .hero-secondary { padding-inline: 15px; }
+}
+@media (max-width: 1024px) {
+  .hero-motion-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-areas: "badge badge" "title title" "intro art" "actions art" "local controls";
+    align-items: start;
+    column-gap: 16px;
+    min-height: 0;
+    padding-block: 30px;
+  }
+  .hero-copy { display: contents; }
+  .hero-visual { position: relative; inset: auto; align-self: stretch; min-height: 220px; margin-top: 12px; }
+  .hero-visual video { transform: none; object-position: 85% center; }
+  .hero-motion-controls { position: static; align-self: center; }
+  .hero-motion-hint { display: none; }
+}
+@media (max-width: 600px) {
+  .hero-motion-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "badge" "title" "art" "controls" "intro" "actions" "local";
+    padding-top: 22px;
+  }
+  .hero-badge { margin-bottom: 24px; font-size: .5625rem; }
+  .hero-motion h1 { font-size: clamp(2.25rem, 10vw, 3.5rem); line-height: 1.06; }
+  .hero-motion .hero-description { margin-top: 24px; font-size: .9375rem; }
+  .hero-motion .hero-actions { margin-top: 25px; gap: 10px; }
+  .hero-motion .primary-link, .hero-secondary { width: 100%; }
+  .hero-motion .hero-local { margin-top: 24px; }
+  .hero-visual {
+    justify-self: center;
+    height: clamp(150px, 44vw, 220px);
+    aspect-ratio: 1;
+    min-height: 0;
+    margin: 12px 0 0;
+  }
+  /* The robot is at 70% of the landscape frame. Center it in the square crop. */
+  .hero-visual video { object-fit: cover; object-position: 96% center; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-motion h1 { animation: none; } }
+@media print { .hero-visual, .hero-motion-controls { display: none; } .hero-motion-layout { min-height: 0; padding-block: 30px; } .hero-copy { width: 100%; } .hero-motion h1 { font-size: 38pt; } }

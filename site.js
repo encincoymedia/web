@@ -38,19 +38,6 @@ document.addEventListener('focusin', event => {
 const desktop = window.matchMedia('(min-width: 901px)');
 desktop.addEventListener('change', event => { if (event.matches) closeMenu(); });
 
-// Real contact handoff: the mailto links open the visitor's email app.
-// No form data is collected or presented as sent by this static page.
-const copyButton = document.querySelector('.copy-email');
-copyButton.addEventListener('click', async () => {
-  const status = document.querySelector('.copy-status');
-  try {
-    await navigator.clipboard.writeText(copyButton.dataset.email);
-    status.textContent = 'Email copiado. Puedes pegarlo en tu aplicación de correo.';
-  } catch {
-    status.textContent = 'Puedes seleccionar y copiar el email que aparece arriba.';
-  }
-});
-
 // Legal copy remains readable in-page if native dialogs are unsupported.
 const legalDialog = document.querySelector('#legal-dialog');
 if (typeof legalDialog.showModal === 'function') {
